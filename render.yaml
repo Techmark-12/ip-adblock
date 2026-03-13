@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: goblock-dns
+    runtime: go
+    plan: free
+    buildCommand: go mod download && go build -o server
+    startCommand: ./server
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RENDER_AUTH_TOKEN
+        generateValue: true
+      - key: GIN_MODE
+        value: release
+    healthCheckPath: /health
